@@ -1,23 +1,36 @@
-from extract.extract_data import df
+import pandas as pd
+"""Validacion de estructura minima
 
-def iterar_columns(columns)->list:
-    """Iterador de columnas que guarda el nombre de todas las columnas
-        en una lista y despues las retorna.
+1-Hay columnas?
 
-    Args:
-        columns (Any): Aca ingresamos todas las columnas.
+2-Hay header?
 
-    Returns:
-        list: La lista con todas las columnas existentes.
-    """
-    list_columns = []
-    for i in range(len(columns)):
-        list_columns.append(columns[i])
-    return list_columns
+3-El archivo no esta vacio?
 
- 
+4-Existe la ruta del archivo?
 
-def validator_rows_column(filas: int, columns: list):
+en caso de ser una de las opciones, se rechaza el CSV.
+"""
+
+def validator_extract(pd, path: str):
+    try:
+        df = pd.read_csv(path)
+        if len(df.columns) <= 3:
+            print(f"Archivo valido pero sin columnas o muy pocas: {len(df.columns)} \n")
+        else:
+            print("Archivo cargado correctamente\n")
+            return df
+    except FileNotFoundError:
+        print("No se encuentra la ruta del archivo\n")        
+    except pd.errors.EmptyDataError:
+        print("El archivo esta vacio\n")
+
+
+
+
+# Agregar un validador que verifique que filas estan vacias o nullas o Nan
+
+def validator_rows_column(df, filas: int, columns: list):
     """Es un validador de filas segun una lista de columnas
 
     Args:
@@ -30,15 +43,10 @@ def validator_rows_column(filas: int, columns: list):
     matriz_filas = []
     for i in range(len(columns)):
         for k in range(filas):
+            # print(f"Valor del indice de la columna {i}: ", df.iloc[k, i])
             matriz_filas.append([df.iloc[k, i]])
+    print(matriz_filas)
     # matriz_filas.append([df.iloc[filas, columns]])
 
-    return matriz_filas
+    # return matriz_filas
 
-
-
-def validator_column(columns):
-    pass
-
-
-# Agregar un validador que verifique que filas estan vacias o nullas o Nan
