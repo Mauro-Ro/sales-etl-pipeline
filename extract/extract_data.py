@@ -1,10 +1,11 @@
+from transform.validation import validator_extract
 import pandas as pd
+
 
 path_csv = "extract/data/Kaggle_Books-Selling-Records-.csv"
 
-def extract(path: str):
-    return pd.read_csv(path)
+def extract(pd, path: str):
+    return validator_extract(pd, path)
 
-df = extract(path_csv)
 
-# def extract_data()
+
