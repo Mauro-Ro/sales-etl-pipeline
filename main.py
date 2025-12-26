@@ -1,17 +1,20 @@
-# from transform.cleaning import 
-from transform.validation import validator_rows_column, iterar_columns
-from extract.extract_data import *
+from transform.validation import validar_nombre_columna, eliminar_columnas_basura
+from extract.extract_data import path_csv, extract, pd
+
+df = extract(pd, path_csv)
+
+def main_pipeline(df):
+    # df = limpiar_header(df) 
+    df = eliminar_columnas_basura(df, validar_nombre_columna(df.columns))
+    return df
+
+
 
 if __name__ == "__main__":
-    # print(all_columns)
-    # df = extract(path_csv)
+    
+    # print(df)
+    # validador_header(df)
+    main_pipeline(df)
+    # print(main_pipeline(df).columns)
 
-    all_columns = iterar_columns(df.columns)
-
-    # print(all_columns)
-    print(validator_rows_column(4, all_columns))
-
-
-    # print(iterar_columns(df.columns))
-
-    # print(iterar_columns(df.rows))
+    pass
