@@ -12,6 +12,10 @@ import pandas as pd
 en caso de ser una de las opciones, se rechaza el CSV.
 """
 
+""" 
+Cambiar Prints por logs de la libreria Logging y que estos se guarden en un archivo 
+"""
+
 def validator_extract(pd, path: str):
     try:
         df = pd.read_csv(path)
